@@ -1,0 +1,45 @@
+ul {
+    padding-top: 2rem;
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    gap: 2rem;
+}
+
+
+li div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+li div h3 {
+    text-transform: uppercase;
+}
+
+.btn {
+    margin-top: 5px;
+    background-color: rgb(141, 14, 14);
+    border-color: rgb(114, 59, 59);
+}
+
+.noArticles {
+    text-align: center;
+    padding-top: 10px;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+img {
+    max-width: 200px;
+    height: 200px;
+    margin-top: 10px;
+}
+
+.content {
+    width: 200px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
