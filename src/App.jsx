@@ -10,6 +10,7 @@ function App() {
 
   useEffect(() => {
     const fetchArticles = async () => {
+
       try {
         const response = await axios.get('http://localhost:3000/posts');
         setArticles(response.data);
