@@ -5,7 +5,6 @@ const ArticleList = ({ articles, onRemoveArticle }) => {
     if (articles.length === 0) {
         return <p className={styles.noArticles}>No articles yet</p>;
     }
-
     return (
         <ul>
             {articles.map((article) => (
@@ -17,17 +16,18 @@ const ArticleList = ({ articles, onRemoveArticle }) => {
                         <p><strong>Image:</strong></p>
                         {article.image && (
                             <img
-                                src={article.image}
+                                src={`http://localhost:3000${article.image}`}
                                 alt={article.title}
                                 className={styles.articleImage} // Aggiunto stile
                             />
                         )}
                         <p className={styles.content}><strong>Content:</strong> {article.content}</p>
-                        <p><strong>Category:</strong> {article.category}</p>
+                        <p><strong>Category:</strong> {article.tags}</p>
                         <p><strong>Tags:</strong> {article.tags.join(', ')}</p>
                     </div>
                     <button className={styles.btn} onClick={() => onRemoveArticle(article.id)}>Delete</button>
                 </li>
+
             ))}
         </ul>
     );

@@ -32,7 +32,7 @@ li div h3 {
     text-transform: uppercase;
 }
 
-img {
+.articleImage {
     max-width: 200px;
     height: 200px;
     margin-top: 10px;

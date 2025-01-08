@@ -13,6 +13,7 @@ function App() {
 
       try {
         const response = await axios.get('http://localhost:3000/posts');
+        console.log(response.data);
         setArticles(response.data);
       } catch (err) {
         setError('Errore durante il recupero degli articoli.');
@@ -26,10 +27,13 @@ function App() {
   //AddArticle
   const addArticle = async (article) => {
     try {
+      console.log("Dati inviati al backend:", article);
       const response = await axios.post('http://localhost:3000/posts', article);
+      console.log('Articolo aggiunto:', response.data);
       setArticles([...articles, response.data]);
     } catch (err) {
       console.error('Errore durante l\'aggiunta dell\'articolo:', err);
+      alert("Errore nell'aggiungere l'articolo");
     }
   };
 

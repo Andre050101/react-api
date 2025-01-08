@@ -77,7 +77,6 @@ const Form = ({ onAddArticle }) => {
         // Reset the file input
         handleFileReset();
     };
-    /******  455d775c-d99e-4d93-b7d9-70028bf3c0e7  *******/
 
     return (
         <form onSubmit={handleSubmit}>
