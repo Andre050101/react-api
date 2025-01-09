@@ -23,7 +23,6 @@ const ArticleList = ({ articles, onRemoveArticle }) => {
                         )}
                         <p className={styles.content}><strong>Content:</strong> {article.content}</p>
                         <p><strong>Category:</strong> {article.tags}</p>
-                        <p><strong>Tags:</strong> {article.tags.join(', ')}</p>
                     </div>
                     <button className={styles.btn} onClick={() => onRemoveArticle(article.id)}>Delete</button>
                 </li>

@@ -1,7 +1,9 @@
 import React, { useState, useRef } from "react";
+import axios from "axios";
 import styles from "./Form.module.css"
 
 const Form = ({ onAddArticle }) => {
+    //Variabili di stato per i campi dei post
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
     const [status, setStatus] = useState("");
@@ -11,7 +13,10 @@ const Form = ({ onAddArticle }) => {
     const [tags, setTags] = useState([]);
     const [state, setState] = useState("");
 
+    //Riferimento per input di file
     const fileInputRef = useRef(null);
+
+    //Metodo per gestione immagini
     const HandleImage = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -38,44 +43,48 @@ const Form = ({ onAddArticle }) => {
             fileInputRef.current.value = "";
         }
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent the default form submission
 
         // Check if the title is provided
-        if (!title.trim()) {
-            e.preventDefault();
-            if (!title.trim())
-                return alert("Title is required");
-        }
+        if (!title.trim()) return alert("Title is required");
 
         // Create a new article object with the form data
         const newArticle = {
-            id: Date.now(),
-            title,
-            author,
-            status,
-            image,
-            content,
-            category,
-            tags,
-            state
+            titolo: title,
+            contenuto: content,
+            tags: tags,
+            image: image,
+            author: author,
+            category: category,
+            status: status
         };
 
-        // Add the new article using the provided callback
-        onAddArticle(newArticle);
+        try {
+            const response = await axios.post("http://localhost:3000/posts", newArticle, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
 
-        // Reset form fields to their initial states
-        setTitle("");
-        setAuthor("");
-        setStatus("");
-        setImage(null);
-        setContent("");
-        setCategory("");
-        setTags([]);
-        setState("");
+            console.log("Nuovo post aggiunto:", response.data);
 
-        // Reset the file input
-        handleFileReset();
+            // Ripristino stato del form
+            setTitle("");
+            setAuthor("");
+            setStatus("");
+            setImage(null);
+            setContent("");
+            setCategory("");
+            setTags([]);
+            setState("");
+            handleFileReset();
+        }
+        catch (error) {
+            console.error("Errore:", error);
+            alert("Errore durante l'aggiunta del post");
+        }
+
     };
 
     return (

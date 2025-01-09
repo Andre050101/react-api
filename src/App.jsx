@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Form from './components/Form';
 import ArticleList from './components/ArticleList';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -9,21 +10,19 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchArticles = async () => {
 
-      try {
-        const response = await axios.get('http://localhost:3000/posts');
-        console.log(response.data);
-        setArticles(response.data);
-      } catch (err) {
-        setError('Errore durante il recupero degli articoli.');
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchArticles();
   }, []);
-
+  function fetchArticles() {
+    axios.get('http://localhost:3000/posts').then((response) => {
+      console.log(response.data);
+      setArticles(response.data);
+    }).catch((err) => {
+      setError('Errore durante il recupero degli articoli.');
+    }).finally(() => {
+      setLoading(false);
+    });
+  };
   //AddArticle
   const addArticle = async (article) => {
     try {
@@ -58,6 +57,12 @@ function App() {
   }
 
   return (
+    /*<BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Form onAddArticle={addArticle} />} />
+        <Route path="/articles" element={<ArticleList articles={articles} onRemoveArticle={removeArticle} />} />
+      </Routes>
+    </BrowserRouter>*/
     <div className='container'>
       <h1>Handle Blog's Articles</h1>
       <Form onAddArticle={addArticle} />
