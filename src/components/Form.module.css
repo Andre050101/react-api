@@ -56,3 +56,7 @@ button:hover {
 .tagsContainer {
     margin-top: 1rem;
 }
+
+.container {
+    max-width: 1200px;
+}

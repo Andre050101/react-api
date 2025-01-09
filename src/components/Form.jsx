@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import styles from "./Form.module.css"
 
@@ -15,6 +16,8 @@ const Form = ({ onAddArticle }) => {
 
     //Riferimento per input di file
     const fileInputRef = useRef(null);
+
+    const navigate = useNavigate();
 
     //Metodo per gestione immagini
     const HandleImage = (e) => {
@@ -79,6 +82,7 @@ const Form = ({ onAddArticle }) => {
             setTags([]);
             setState("");
             handleFileReset();
+            navigate("/");
         }
         catch (error) {
             console.error("Errore:", error);
@@ -87,123 +91,131 @@ const Form = ({ onAddArticle }) => {
 
     };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Title:</label>
-                <input
-                    type="text"
-                    name="title"
-                    placeholder="Enter article title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)} />
-            </div>
-            <div>
-                <label>Author:</label>
-                <input
-                    type="text"
-                    placeholder="Enter article author"
-                    name="author"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)} />
-            </div>
-            <div>
-                <label>Status:</label>
-                <select
-                    name="status"
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                >
-                    <option value="" disabled>Choose a status</option>
-                    <option value="draft">Draft</option>
-                    <option value="published">Published</option>
-                </select>
-            </div>
-            <div>
-                <label>Image:</label>
-                <input
-                    type="file"
-                    name="Image"
-                    accept="image/*"
-                    ref={fileInputRef}
-                    onChange={HandleImage}
 
-                />
-                {image && <img src={image} alt="Preview" style={{ maxWidth: "200px", marginTop: "10px" }} />}
-            </div>
-            <div>
-                <label>Content:</label>
-                <br />
-                <textarea
-                    name="Content"
-                    placeholder="Enter article content"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                />
-            </div>
-            <div>
-                <label>Category:</label>
-                <select
-                    name="category"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                >
-                    <option value="" disabled>Choose a category</option>
-                    <option value="technology">Technology</option>
-                    <option value="health">Health</option>
-                    <option value="cooking">Cooking</option>
-                    <option value="travel">Travel</option>
-                    <option value="sport">Sport</option>
-                    <option value="music">Music</option>
-                    <option value="art">Art</option>
-                    <option value="formation">Formation</option>
-                    <option value="lifestyle">Lifestyle</option>
-                    <option value="finance">Finance</option>
-                </select>
-            </div>
-            <div>
-                <label>Tags:</label>
-                <div className={styles.tagsContainer}>
-                    <label>
+    return (
+        <>
+            <h1>Add New Article</h1>
+            <div className="container">
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label>Title:</label>
                         <input
-                            className={styles.tags}
-                            type="checkbox"
-                            value="Technology"
-                            onChange={handleTagChange}
-                        />
-                        Technology
-                    </label>
-                    <label>
+                            type="text"
+                            name="title"
+                            placeholder="Enter article title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)} />
+                    </div>
+                    <div>
+                        <label>Author:</label>
                         <input
-                            className={styles.tags}
-                            type="checkbox"
-                            value="Health"
-                            onChange={handleTagChange}
-                        />
-                        Health
-                    </label>
-                    <label>
+                            type="text"
+                            placeholder="Enter article author"
+                            name="author"
+                            value={author}
+                            onChange={(e) => setAuthor(e.target.value)} />
+                    </div>
+                    <div>
+                        <label>Status:</label>
+                        <select
+                            name="status"
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
+                        >
+                            <option value="" disabled>Choose a status</option>
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Image:</label>
                         <input
-                            className={styles.tags}
-                            type="checkbox"
-                            value="Business"
-                            onChange={handleTagChange}
+                            type="file"
+                            name="Image"
+                            accept="image/*"
+                            ref={fileInputRef}
+                            onChange={HandleImage}
+
                         />
-                        Business
-                    </label>
-                    <label>
-                        <input
-                            className={styles.tags}
-                            type="checkbox"
-                            value="Lifestyle"
-                            onChange={handleTagChange}
+                        {image && <img src={image} alt="Preview" style={{ maxWidth: "200px", marginTop: "10px" }} />}
+                    </div>
+                    <div>
+                        <label>Content:</label>
+                        <br />
+                        <textarea
+                            name="Content"
+                            placeholder="Enter article content"
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
                         />
-                        Lifestyle
-                    </label>
-                </div>
+                    </div>
+                    <div>
+                        <label>Category:</label>
+                        <select
+                            name="category"
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                        >
+                            <option value="" disabled>Choose a category</option>
+                            <option value="technology">Technology</option>
+                            <option value="health">Health</option>
+                            <option value="cooking">Cooking</option>
+                            <option value="travel">Travel</option>
+                            <option value="sport">Sport</option>
+                            <option value="music">Music</option>
+                            <option value="art">Art</option>
+                            <option value="formation">Formation</option>
+                            <option value="lifestyle">Lifestyle</option>
+                            <option value="finance">Finance</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Tags:</label>
+                        <div className={styles.tagsContainer}>
+                            <label>
+                                <input
+                                    className={styles.tags}
+                                    type="checkbox"
+                                    value="Technology"
+                                    onChange={handleTagChange}
+                                />
+                                Technology
+                            </label>
+                            <label>
+                                <input
+                                    className={styles.tags}
+                                    type="checkbox"
+                                    value="Health"
+                                    onChange={handleTagChange}
+                                />
+                                Health
+                            </label>
+                            <label>
+                                <input
+                                    className={styles.tags}
+                                    type="checkbox"
+                                    value="Business"
+                                    onChange={handleTagChange}
+                                />
+                                Business
+                            </label>
+                            <label>
+                                <input
+                                    className={styles.tags}
+                                    type="checkbox"
+                                    value="Lifestyle"
+                                    onChange={handleTagChange}
+                                />
+                                Lifestyle
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit">Add Article</button>
+                </form>
             </div>
-            <button type="submit">Add Article</button>
-        </form>
+
+        </>
+
     );
 };
 

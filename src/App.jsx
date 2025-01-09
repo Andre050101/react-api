@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Form from './components/Form';
-import ArticleList from './components/ArticleList';
+import ArticleList from './pages/ArticleList';
+import HomePage from './pages/HomePage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -57,17 +58,17 @@ function App() {
   }
 
   return (
-    /*<BrowserRouter>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Form onAddArticle={addArticle} />} />
-        <Route path="/articles" element={<ArticleList articles={articles} onRemoveArticle={removeArticle} />} />
+        <Route path="/" element={<HomePage articles={articles} onRemoveArticle={removeArticle} />} />
+        <Route path="/new" element={<Form onAddArticle={addArticle} />} />
       </Routes>
-    </BrowserRouter>*/
-    <div className='container'>
+    </BrowserRouter>
+    /*<div className='container'>
       <h1>Handle Blog's Articles</h1>
       <Form onAddArticle={addArticle} />
       <ArticleList articles={articles} onRemoveArticle={removeArticle} />
-    </div>
+    </div>*/
   );
 }
 
